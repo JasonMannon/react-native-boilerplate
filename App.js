@@ -1,12 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider, connect } from 'react-redux'
+import configureStore from './app/store/configureStore'
+import { createStore } from 'redux'
+import { Tabs } from './app/config/router';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <Provider store={store}>
+        <Tabs />
+      </Provider>
     );
   }
 }
