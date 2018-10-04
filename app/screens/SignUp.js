@@ -3,13 +3,15 @@ import { connect } from 'react-redux'
 import UserActions from '../reducers/user'
 import { Text, View, TextInput, Button } from 'react-native';
 
-class SignIn extends React.Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props)
 
     this.state ={
       email: '',
-      password: ''
+      nickname: '',
+      password: '',
+      passwordConfirmation: ''
     }
   }
 
@@ -20,9 +22,9 @@ class SignIn extends React.Component {
   }
 
   handleOnSubmit = () => {
-    const { email, password } = this.state
+    const { email, nickname, password, passwordConfirmation } = this.state
 
-    this.props.signInUserRequest(email, password)
+    this.props.createUserRequest(email, nickname, password, passwordConfirmation)
   }
 
   _signInAsync = async () => {
@@ -38,7 +40,7 @@ class SignIn extends React.Component {
   }
 
   render() {
-    const { email, password } = this.state
+    const { email, nickname, password, passwordConfirmation } = this.state
     const { errorMessage, userLoggedIn } = this.props
 
     if (userLoggedIn) {
@@ -48,7 +50,7 @@ class SignIn extends React.Component {
     return (
       <View style={{flex: 1, justifyContent: 'center'}}>
         <View style={{alignItems: 'center'}}>
-          <Text>Boilerplate Sign In</Text>
+          <Text>Boilerplate Sign Up</Text>
           <Text>{errorMessage}</Text>
         </View>
         <View style={{margin: 15}}>
@@ -60,22 +62,36 @@ class SignIn extends React.Component {
           />
           <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            placeholder='Nickname'
+            onChangeText={(nickname) => this.handleChangeText('nickname', nickname)}
+            value={nickname}
+          />
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             textContentType='password'
             secureTextEntry={true}
             placeholder='Password'
             value={password}
             onChangeText={(password) => this.handleChangeText('password', password)}
           />
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            textContentType='password'
+            secureTextEntry={true}
+            placeholder='Password Confirmation'
+            value={passwordConfirmation}
+            onChangeText={(passwordConfirmation) => this.handleChangeText('passwordConfirmation', passwordConfirmation)}
+          />
         </View>
         <View>
           <Button
             onPress={() => this.handleOnSubmit()}
-            title="Sign In"
+            title="Sign Up"
             color="#841584"
           />
         </View>
         <View style={{alignItems: 'center'}}>
-          <Text onPress={() => this.props.navigation.navigate('SignUp')}>New here? Sign up now!</Text>
+          <Text onPress={() => this.props.navigation.navigate('SignIn')}>Already have an account? Sign In!</Text>
         </View>
       </View>
     )
@@ -93,7 +109,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  signInUserRequest: (email, password) => dispatch(UserActions.signInUserRequest(email, password))
+  createUserRequest: (email, nickname, password, passwordConfirmation) => dispatch(UserActions.createUserRequest(email, nickname, password, passwordConfirmation))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

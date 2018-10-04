@@ -5,6 +5,8 @@ import configureStore from './app/store/configureStore'
 import { createStore } from 'redux'
 import { Tabs } from './app/config/router';
 
+const store = configureStore()
+
 export default class App extends React.Component {
   render() {
     return (

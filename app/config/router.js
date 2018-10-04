@@ -1,12 +1,13 @@
 import React from 'react'
 import { Text, Image, Button } from 'react-native'
-import { Icon } from 'react-native-elements'
 import { NavigationActions, createSwitchNavigator, createStackNavigator, TabBarBottom } from 'react-navigation';
 import SignIn from '../screens/SignIn'
+import SignUp from '../screens/SignUp'
 import AuthLoading from '../screens/AuthLoading'
 
 const UnAuthenticatedTabs = createSwitchNavigator({
-  SignIn: { screen: SignIn }
+  SignIn: { screen: SignIn },
+  SignUp: { screen: SignUp }
 })
 
 const AuthenticatedTabs = createStackNavigator({

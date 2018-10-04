@@ -49,7 +49,14 @@ const create = (dispatch) => {
     console.log('error')
   }
 
+  const signInUser = (email, password) => api.post('/auth/sign_in', { email, password })
+
+  const createUser = (email, nickname, password, passwordConfirmation) =>
+    api.post('/auth', { email, nickname, password, password_confirmation: passwordConfirmation })
+
   return {
+    createUser,
+    signInUser
   }
 }
 
