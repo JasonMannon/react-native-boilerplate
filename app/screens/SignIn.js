@@ -26,6 +26,7 @@ class SignIn extends React.Component {
   }
 
   _signInAsync = async () => {
+    console.log("async")
     const { userData } = this.props
 
     await AsyncStorage.setItem('user', JSON.stringify(userData))
@@ -42,7 +43,8 @@ class SignIn extends React.Component {
     const { errorMessage, userLoggedIn } = this.props
 
     if (userLoggedIn) {
-
+      console.log('here')
+      this._signInAsync()
     }
 
     return (
@@ -84,6 +86,7 @@ class SignIn extends React.Component {
 
 const mapStateToProps = (state) => {
   const { errorMessage, userData, userLoggedIn} = state.user
+  console.log(state.user)
 
   return{
     errorMessage,
