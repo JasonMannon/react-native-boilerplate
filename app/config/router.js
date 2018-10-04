@@ -3,6 +3,7 @@ import { Text, Image, Button } from 'react-native'
 import { NavigationActions, createSwitchNavigator, createStackNavigator, TabBarBottom } from 'react-navigation';
 import SignIn from '../screens/SignIn'
 import SignUp from '../screens/SignUp'
+import Main from '../screens/Main'
 import AuthLoading from '../screens/AuthLoading'
 
 const UnAuthenticatedTabs = createSwitchNavigator({
@@ -11,10 +12,9 @@ const UnAuthenticatedTabs = createSwitchNavigator({
 })
 
 const AuthenticatedTabs = createStackNavigator({
-
-  SignIn: { screen: SignIn,
+  Main: { screen: Main,
     navigationOptions: ({ navigation }) => ({
-      title: 'Customer Feed',
+      title: 'Main',
     })
    }
   }
