@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import Actions from '../reducers/user'
+import { NavigationActions } from 'react-navigation'
 
 export function* createUserRequest (api, { email, nickname, password, passwordConfirmation }) {
   const response = yield call(api.createUser, email, nickname, password, passwordConfirmation)
@@ -31,5 +32,13 @@ export function* signInUserRequest (api, { email, password }) {
     const errorMessage = errors.join(', ')
 
     yield put(Actions.signInUserError(errorMessage))
+  }
+}
+
+export function* signOutUserRequest (api) {
+  const response = yield call(api.signOutUser)
+
+  if (response.ok) {
+    yield put(Actions.signOutUserSuccess())
   }
 }
