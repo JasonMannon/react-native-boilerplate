@@ -19,13 +19,15 @@ class DrawerScreen extends Component {
     this.props.signOutUser()
   };
 
-  render () {
+  componentDidUpdate() {
     const { userLoggedOut } = this.props
 
     if (userLoggedOut) {
       this.props.navigation.navigate('SignIn')
     }
+  }
 
+  render () {
     return (
       <View style={{flex: 1}}>
         <ScrollView style={{flex: 1}}>

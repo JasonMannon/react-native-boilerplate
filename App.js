@@ -11,7 +11,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Navigator />
+        <Navigator ref={nav=>{this.navigator = nav}}/>
       </Provider>
     );
   }

@@ -32,11 +32,7 @@ class SignUp extends React.Component {
 
     await AsyncStorage.setItem('user', JSON.stringify(userData))
 
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'Main' })],
-    });
-    this.props.navigation.dispatch(resetAction);
+    this.props.navigation.navigate('Main')
   }
 
   render() {
@@ -44,7 +40,7 @@ class SignUp extends React.Component {
     const { errorMessage, userLoggedIn } = this.props
 
     if (userLoggedIn) {
-      this._signInAsync
+      this._signInAsync()
     }
 
     return (

@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import Actions from '../reducers/user'
+import { NavigationActions } from 'react-navigation'
 
 export function* createUserRequest (api, { email, nickname, password, passwordConfirmation }) {
   const response = yield call(api.createUser, email, nickname, password, passwordConfirmation)
