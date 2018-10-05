@@ -24,7 +24,7 @@ describe('createUser', () => {
     expect(state.userData.accessToken).toBe('JfF7TJBzIEUWygEwZYGVBg')
     expect(state.userData.email).toBe('test@gmail.com')
     expect(state.userData.nickname).toBe('nickname')
-    expect(state.userLoggedIn).toBeTruthy()    
+    expect(state.userLoggedIn).toBeTruthy()
   })
 
   it('handles createUserError', () => {
@@ -53,6 +53,7 @@ describe('signInUser', () => {
     expect(state.userData.email).toBe('test@gmail.com')
     expect(state.userData.nickname).toBe('nickname')
     expect(state.userLoggedIn).toBeTruthy()
+    expect(state.userLoggedOut).toBeFalsy()
   })
 
   it('handles signInUserError', () => {
@@ -60,5 +61,21 @@ describe('signInUser', () => {
 
     expect(state.loading).toBeFalsy()
     expect(state.errorMessage).toBe('error')
+  })
+})
+
+describe('signOutUser', () => {
+  it('handles signOutUserRequest', () => {
+    const state = reducer(INITIAL_STATE, Actions.signOutUserRequest())
+
+    expect(state.loading).toBeTruthy()
+  })
+
+  it('handles signOutUserSuccess', () => {
+    const state = reducer(INITIAL_STATE, Actions.signOutUserSuccess())
+
+    expect(state.loading).toBeFalsy()
+    expect(state.userLoggedIn).toBeFalsy()
+    expect(state.userLoggedOut).toBeTruthy()
   })
 })

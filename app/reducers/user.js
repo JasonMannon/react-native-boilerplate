@@ -40,8 +40,8 @@ export const signInUserError = (state, { errorMessage }) => state.merge({
   loading: false
 })
 
-export const signOutUserRequest = (state) => state.merge({ loading: true, errorMessage: null })
-export const signOutUserSuccess = (state) => state.merge({ userLoggedIn: false, userLoggedOut: true })
+export const signOutUserRequest = (state) => state.merge({ loading: true })
+export const signOutUserSuccess = (state) => state.merge({ loading: false, userLoggedIn: false, userLoggedOut: true })
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_USER_REQUEST]: createUserRequest,
