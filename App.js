@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Provider, connect } from 'react-redux'
 import configureStore from './app/store/configureStore'
 import { createStore } from 'redux'
-import { Tabs } from './app/config/router';
+import { Navigator } from './app/config/router';
 
 const store = configureStore()
 
@@ -11,7 +11,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Tabs />
+        <Navigator />
       </Provider>
     );
   }

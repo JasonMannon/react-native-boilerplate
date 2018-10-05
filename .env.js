@@ -1,5 +1,5 @@
 var devEnv = {
-  apiUrl: 'http://80bc7069.ngrok.io'
+  apiUrl: 'http://8ac48330.ngrok.io'
 }
 
 exports.default = devEnv
