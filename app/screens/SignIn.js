@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import UserActions from '../reducers/user'
-import { Text, View, TextInput, Button } from 'react-native';
+import { NavigationActions } from 'react-navigation'
+import { Text, View, TextInput, Button, AsyncStorage } from 'react-native';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -26,16 +27,11 @@ class SignIn extends React.Component {
   }
 
   _signInAsync = async () => {
-    console.log("async")
     const { userData } = this.props
 
     await AsyncStorage.setItem('user', JSON.stringify(userData))
 
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'Main' })],
-    });
-    this.props.navigation.dispatch(resetAction);
+    this.props.navigation.navigate('Main')
   }
 
   render() {
@@ -43,7 +39,6 @@ class SignIn extends React.Component {
     const { errorMessage, userLoggedIn } = this.props
 
     if (userLoggedIn) {
-      console.log('here')
       this._signInAsync()
     }
 
@@ -86,7 +81,6 @@ class SignIn extends React.Component {
 
 const mapStateToProps = (state) => {
   const { errorMessage, userData, userLoggedIn} = state.user
-  console.log(state.user)
 
   return{
     errorMessage,

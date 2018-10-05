@@ -1,11 +1,12 @@
 import { call, put } from 'redux-saga/effects'
 import sagaHelper from 'redux-saga-testing'
-import { signInUserRequest, createUserRequest } from '../../sagas/userSagas'
+import { signInUserRequest, createUserRequest, signOutUserRequest } from '../../sagas/userSagas'
 import Actions from '../../reducers/user'
 
 const api = {
   signInUser: jest.fn(),
-  createUser: jest.fn()
+  createUser: jest.fn(),
+  signOutUser: jest.fn()
 }
 
 const email = 'email@test.com'
@@ -18,10 +19,11 @@ const client = 'client'
 const signInUserRequestAction = Actions.signInUserRequest(email, password)
 const createUserRequestAction = Actions.createUserRequest(email, nickname, password, passwordConfirmation)
 const createUserFailureAction = Actions.createUserRequest(email, nickname, password, wrongPassword)
+const signOutUserRequestAction = Actions.signOutUserRequest()
 
 describe('userSaga', () => {
+  
   describe('signInUser', () => {
-
     describe('signInUserRequest', () => {
       describe('successful request', () => {
         const userData = { uid: 'uid',
@@ -82,7 +84,6 @@ describe('userSaga', () => {
   })
 
   describe('createUser', () => {
-
     describe('createUserRequest', () => {
       describe('successful request', () => {
         const userData = { uid: 'uid',
@@ -141,7 +142,30 @@ describe('userSaga', () => {
         it('should end saga', result => expect(result).toBeUndefined())
       })
     })
+  })
 
+  describe('signOutUser', () => {
+    describe('signOutUserRequest', () => {
+      describe('successful request', () => {
+        const accessToken = 'authToken'
+        const client = 'client'
+        const successfulSignOutUserResponse = {
+          ok: true
+        }
+        const it = sagaHelper(signOutUserRequest(api, signOutUserRequestAction))
+
+        it('should sign out user via api', result => {
+          expect(result).toEqual(call(api.signOutUser))
+          return successfulSignOutUserResponse
+        })
+
+        it('should put sign out success action', result => {
+          expect(result).toEqual(put(Actions.signOutUserSuccess()))
+        })
+
+        it('should end saga', result => expect(result).toBeUndefined())
+      })
+    })
   })
 
 })

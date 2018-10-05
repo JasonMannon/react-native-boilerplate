@@ -10,20 +10,11 @@ class Main extends React.Component {
     }
   }
 
-  handleChangeText = (key, value) => {
-    this.setState({
-      [key]: value
-    })
-  }
-
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center'}}>
         <View style={{alignItems: 'center'}}>
           <Text>Boilerplate Main View</Text>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text onPress={() => this.props.navigation.navigate('SignUp')}>Log Out!</Text>
         </View>
       </View>
     )
